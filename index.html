@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+			Comparisons
+		</title>
+		<base target="_blank">
+		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-firestore.js"></script>
+		<script src="https://epicenterprograms.github.io/standards/behavior/firebaseinit.js"></script>
+		<script src="https://epicenterprograms.github.io/standards/behavior/storage.js"></script>
+		<script>
+			var S = Standards;
+            var M = S.storage;
+            M.session.defaultLocation = "/comparisons/";
+			M.local.defaultLocation = "/comparisons/";
+			M.server.defaultLocation = "/comparisons/";
+			var title = "";  // the title of the current subject
+
+			function loadTable(name) {
+				if (name === "") {  // if an empty table should be created
+					S.getId("displayTable").innerHTML = "";
+					////
+					S.getId("showEditor").click();
+				} else {
+					//// load a certain subject
+                }
+            }
+
+			S.onLoad(function () {
+				if (M.local.recall("site settings") instanceof Error || M.local.recall("site settings/home page") instanceof Error || M.local.recall("site settings/home page") == "subject selector") {
+					//// open on the subject selector
+				} else {  // if opening to a specific subject
+
+                }
+			});
+		</script>
+		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
+		<style>
+			#subjectInformation {
+				display: none;
+			}
+            #displayTable {
+                display: inline-block;
+                padding: .1em;  /* prevents unnecessary scroll bar */
+                max-width: 100%;
+                max-height: 40em;
+                overflow: auto;
+            }
+			#editingSection {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 class="main-title">
+			Comparisons
+		</h1>
+		<div class="user-section">
+			<button id="signIn">
+				Log in
+			</button>
+			<button id="signUp">
+				Register
+			</button>
+			<button id="userSettings">
+				Settings
+			</button>
+			<button id="signOut">
+				Log out
+			</button>
+		</div>
+		<main>
+			<div id="subjectSelector">
+				<section>
+					Select the subject you wish to analyze or make a new one.
+				</section>
+				<select id="subjectList"></select>
+				<br>
+				<button onclick="loadTable('')">
+					Create
+				</button>
+				<br>
+				<button id="syncData" disabled>
+					Sync with your<br>account
+				</button>
+			</div>
+			<div id="subjectInformation">
+				<section>
+					Record and view subject information here.
+				</section>
+				<section>
+					To compare categories, use the checkboxes on the top of the table to select more than one category and then press the "Compare categories" button. All other categories will be hidden and numerical data will be color coded relative to the other data in that category.
+				</section>
+				<section>
+					To evaluate options, use the checkboxes on the top of the table to select a single category and then press the "Evaluate options" button. Upon doing so, a dialog box will appear asking you to choose a unique item within the selected category. Once selected, all entries with that item in that category will be isolated, and if there's more than one entry, the numerical data will be color coded relative to the other data in that category.
+				</section>
+				<input type="text" id="subjectTitle" placeholder="Subject title">
+				<br>
+				<br>
+				<button id="compare">
+					Compare categories
+				</button>
+				<button id="evaluate">
+					Evaluate options
+				</button>
+				<br>
+				<table id="displayTable" contenteditable="true"></table>
+				<br>
+				<br>
+				<input type="checkbox" id="showEditor">
+				<label for="showEditor">Show editor</label>
+				<br>
+				<div id="editingSection">
+					<button id="newRow">
+						New row
+					</button>
+					<button id="newColumn">
+						New column
+					</button>
+					<br>
+					<button id="deleteRow">
+						Delete row...
+					</button>
+					<input type="number" id="rowNumber" placeholder="#">
+					<button id="deleteColumn">
+						Delete column...
+					</button>
+					<input type="number" id="columnNumber" placeholder="#">
+					<br>
+					<button id="resetFamiliarity">
+						Reset
+					</button>
+					familiarity of column number
+					<input type="number" id="familiarityColumn" placeholder="#">
+					<br>
+					<button id="save">
+						Save
+					</button>
+				</div>
+				<br>
+				<button id="toSelector">
+					Select new<br>subject
+				</button>
+			</div>
+		</main>
+	</body>
+</html>
